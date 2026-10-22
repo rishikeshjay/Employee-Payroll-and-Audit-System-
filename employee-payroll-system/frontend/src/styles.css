@@ -1,0 +1,318 @@
+/* ============================================================
+   Ledger — a payroll register aesthetic: ink sidebar, paper
+   content, numerals in monospace, hairline rules instead of
+   card shadows.
+   ============================================================ */
+
+:root {
+  --ink: #1B2430;
+  --ink-soft: #2C3848;
+  --paper: #F1EEE4;
+  --paper-raised: #FFFFFF;
+  --rule: #D8D2C2;
+  --text: #23262B;
+  --text-mute: #6B6F76;
+  --green: #3F6E52;
+  --green-deep: #2E5240;
+  --brass: #B98A3D;
+  --red: #A23E3E;
+
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #E7E4DA;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.brand-mark {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--brass);
+  line-height: 1;
+}
+
+.brand-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: #9AA0AC;
+  margin-top: 1px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  text-align: left;
+  background: none;
+  border: none;
+  color: #C7CBD3;
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+}
+
+.nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+.nav-item.is-active {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  border-left: 2px solid var(--brass);
+  font-weight: 500;
+}
+
+.conn-status {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9AA0AC;
+}
+
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--text-mute);
+  flex-shrink: 0;
+}
+.conn-status.ok .dot { background: var(--green); }
+.conn-status.err .dot { background: var(--red); }
+
+/* ---------- Content ---------- */
+
+.content {
+  flex: 1;
+  padding: 40px 48px;
+  max-width: 1080px;
+}
+
+.view-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.view-head h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0;
+  color: var(--ink);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin: -10px 0 18px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  background: var(--paper-raised);
+  color: var(--text);
+  cursor: pointer;
+}
+.btn:hover { border-color: #B9B29C; }
+
+.btn-accent {
+  background: var(--green);
+  border-color: var(--green-deep);
+  color: #fff;
+}
+.btn-accent:hover { background: var(--green-deep); }
+
+.btn-small {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.btn-danger { color: var(--red); }
+
+/* ---------- Forms ---------- */
+
+.panel {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 18px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--text-mute);
+  font-weight: 500;
+}
+
+.form-grid input, .form-grid select {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--text);
+}
+
+.form-grid input:focus, .form-grid select:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.form-error {
+  grid-column: 1 / -1;
+  color: var(--red);
+  font-size: 13px;
+  margin: 0;
+  min-height: 1em;
+}
+
+/* ---------- Ledger table ---------- */
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+}
+
+.ledger thead th {
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-mute);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: #FAF8F2;
+}
+
+.ledger td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13.5px;
+  vertical-align: middle;
+}
+
+.ledger tbody tr:last-child td { border-bottom: none; }
+.ledger tbody tr:hover { background: #FAF8F2; }
+
+.ledger .num, .ledger td.num {
+  font-family: var(--mono);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger .empty-row td {
+  text-align: center;
+  color: var(--text-mute);
+  padding: 26px;
+  font-style: italic;
+}
+
+/* Status pills */
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.pill-active, .pill-approved, .pill-completed { background: #E4EEE7; color: var(--green-deep); }
+.pill-inactive, .pill-pending { background: #F1EAD6; color: var(--brass); }
+.pill-terminated, .pill-rejected { background: #F3E1E1; color: var(--red); }
+
+/* Audit row expansion */
+.audit-row { cursor: pointer; }
+.audit-detail td {
+  background: #FAF8F2;
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: pre-wrap;
+  color: var(--text-mute);
+  padding: 12px 14px;
+}
+
+@media (max-width: 800px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; flex-direction: row; align-items: center; padding: 14px 18px; }
+  .brand { margin-bottom: 0; }
+  .nav { flex-direction: row; margin-left: auto; }
+  .conn-status { display: none; }
+  .content { padding: 24px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
